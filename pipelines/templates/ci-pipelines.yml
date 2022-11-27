@@ -15,7 +15,7 @@ stages:
               jdkArchitectureOption: 'x64'
               jdkSourceOption: AzureStorage
               azureResourceManagerEndpoint: 'recipe-sp'
-              azureStorageAccountName: 'recipesa'
+              azureStorageAccountName: 'recipesaa'
               azureContainerName: 'jdk'
               azureCommonVirtualFile: 'OpenJDK17.zip'
               jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk17'
