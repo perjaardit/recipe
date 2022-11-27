@@ -16,7 +16,7 @@
 	<description>An application which allows users to manage their favourite recipes.</description>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 		<archunit-junit5.version>1.0.1</archunit-junit5.version>
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 	</properties>
