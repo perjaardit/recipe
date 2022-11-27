@@ -2,7 +2,7 @@ stages:
   - stage: ProvisionContinuesIntegration
     displayName: "Provision Continues Integration"
     pool:
-      vmImage: windows-latest
+      vmImage: ubuntu-latest
     jobs:
       - job: ProvisionContinuesIntegration
         displayName: "Provision Continues Integration"
@@ -10,17 +10,13 @@ stages:
           # Java tool installer
           # Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME
           - task: JavaToolInstaller@0
-            inputs:
-              versionSpec: '17'
-              jdkArchitectureOption: 'x64' # Options: x64, x86
-              jdkSourceOption: # Options: AzureStorage, LocalDirectory
-              #jdkFile: # Required when jdkSourceOption == LocalDirectory
-              #azureResourceManagerEndpoint: # Required when jdkSourceOption == AzureStorage
-              #azureStorageAccountName: # Required when jdkSourceOption == AzureStorage
-              #azureContainerName: # Required when jdkSourceOption == AzureStorage
-              #azureCommonVirtualFile: # Required when jdkSourceOption == AzureStorage
-              jdkDestinationDirectory:
-              #cleanDestinationDirectory: true
+              inputs:
+                versionSpec: "11"
+                jdkArchitectureOption: x64
+                jdkSourceOption: LocalDirectory
+                jdkFile: "/builds/openjdk-11.0.2_linux-x64_bin.tar.gz"
+                jdkDestinationDirectory: "/builds/binaries/externals"
+                cleanDestinationDirectory: true
           - task: Maven@3
             displayName: 'Maven Package'
             inputs:
