@@ -14,7 +14,7 @@ stages:
         displayName: "Provision Continues Deployment"
         steps:
           - download: current
-            artifact: hello-world
+            artifact: recipe
           - task: AzureRmWebAppDeployment@4
             inputs:
               ConnectionType: 'AzureRM'
