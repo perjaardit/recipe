@@ -1,3 +1,9 @@
+parameters:
+  - name: servicePrincipal
+    type: string
+  - name: accountStorage
+    type: string
+
 stages:
   - stage: ProvisionContinuesIntegration
     displayName: "Provision Continues Integration"
@@ -14,8 +20,8 @@ stages:
               versionSpec: '17'
               jdkArchitectureOption: 'x64'
               jdkSourceOption: AzureStorage
-              azureResourceManagerEndpoint: 'recipe-sp'
-              azureStorageAccountName: 'recipesa'
+              azureResourceManagerEndpoint: ${{ parameters.servicePrincipal }}
+              azureStorageAccountName: ${{ parameters.accountStorage }}
               azureContainerName: 'jdk'
               azureCommonVirtualFile: 'OpenJDK17.zip'
               jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk17'

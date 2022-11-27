@@ -11,9 +11,14 @@ variables:
     value: "recipe-sp"
   - name: appService
     value: "recipe-app-service"
+  - name: accountStorage
+    value: "recipesa"
 
 stages:
   - template: templates/ci-pipelines.yml
+    parameters:
+      servicePrincipal: $(servicePrincipal)
+      accountStorage: $(accountStorage)
   - template: templates/cd-pipelines.yml
     parameters:
       servicePrincipal: $(servicePrincipal)
