@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "b97af8c2-16fc-4dca-89b4-8f26f11d8900",
+		"name": "Recipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The first recipe 2\",\r\n    \"instructions\": \"The instructions for the first recipe\",\r\n    \"servings\": 3,\r\n    \"vegetarian\": true,\r\n    \"ingredients\": [\r\n        {   \r\n            \"name\": \"Ingredient 1\",\r\n            \"healthBenefit\": \"This is the health benefit of the ingredient\",\r\n            \"measure\": 0.5,\r\n            \"unit\": \"KG\"\r\n        }, {   \r\n            \"name\": \"Ingredient 3\",\r\n            \"healthBenefit\": \"This is the health benefit of the ingredient\",\r\n            \"measure\": 1.0,\r\n            \"unit\": \"GR\"\r\n        }\r\n\r\n    ]\r\n\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/recipes/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recipes",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update existing recipe",
+			"request": {
+				"method": "PUT",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific recipe by id",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a specific recipie by id",
+			"request": {
+				"method": "DELETE",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Search with params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/recipes?vegetarian=true&servings=3&searchKey&includeIngredients=Ingredient 1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recipes"
+					],
+					"query": [
+						{
+							"key": "vegetarian",
+							"value": "true"
+						},
+						{
+							"key": "servings",
+							"value": "3"
+						},
+						{
+							"key": "searchKey",
+							"value": null
+						},
+						{
+							"key": "includeIngredients",
+							"value": "Ingredient 1"
+						},
+						{
+							"key": "excludeIngredients",
+							"value": "Ingredient 1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
