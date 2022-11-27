@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"The first recipe 2\",\r\n    \"instructions\": \"The instructions for the first recipe\",\r\n    \"servings\": 3,\r\n    \"vegetarian\": true,\r\n    \"ingredients\": [\r\n        {   \r\n            \"name\": \"Ingredient 1\",\r\n            \"healthBenefit\": \"This is the health benefit of the ingredient\",\r\n            \"measure\": 0.5,\r\n            \"unit\": \"KG\"\r\n        }, {   \r\n            \"name\": \"Ingredient 3\",\r\n            \"healthBenefit\": \"This is the health benefit of the ingredient\",\r\n            \"measure\": 1.0,\r\n            \"unit\": \"GR\"\r\n        }\r\n\r\n    ]\r\n\r\n}\r\n\r\n",
+					"raw": "{\r\n    \"name\": \"The first recipe 2\",\r\n    \"instructions\": \"The instructions for the first recipe 1\",\r\n    \"servings\": 1,\r\n    \"vegetarian\": true,\r\n    \"ingredients\": [\r\n        {\r\n            \"iid\": 2,\r\n            \"measure\": 1.0,\r\n            \"unit\": \"GR_UNIT\"\r\n        },\r\n        {\r\n            \"iid\": 1,\r\n            \"measure\": 1.0,\r\n            \"unit\": \"MG_UNIT\"\r\n        }\r\n\r\n    ]\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,7 +39,29 @@
 			"name": "Update existing recipe",
 			"request": {
 				"method": "PUT",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rid\": 1,\r\n    \"name\": \"The first recipe 1 update\",\r\n    \"instructions\": \"The instructions for the first recipe 1 update\",\r\n    \"servings\": 5,\r\n    \"vegetarian\": false,\r\n    \"ingredients\": [\r\n        {\r\n            \"iid\": 2,\r\n            \"measure\": 0.5,\r\n            \"unit\": \"MG_UNIT\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/recipes/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recipes",
+						"update"
+					]
+				}
 			},
 			"response": []
 		},
@@ -47,7 +69,20 @@
 			"name": "Get specific recipe by id",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/recipes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"recipes",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -65,7 +100,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/recipes?vegetarian=true&servings=3&searchKey&includeIngredients=Ingredient 1",
+					"raw": "http://localhost:8080/api/recipes",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,19 +113,23 @@
 					"query": [
 						{
 							"key": "vegetarian",
-							"value": "true"
+							"value": "true",
+							"disabled": true
 						},
 						{
 							"key": "servings",
-							"value": "3"
+							"value": "3",
+							"disabled": true
 						},
 						{
 							"key": "searchKey",
-							"value": null
+							"value": null,
+							"disabled": true
 						},
 						{
 							"key": "includeIngredients",
-							"value": "Ingredient 1"
+							"value": "Ingredient 1",
+							"disabled": true
 						},
 						{
 							"key": "excludeIngredients",

@@ -17,7 +17,11 @@ public class RestExceptionHandler {
     @ApiResponse(responseCode = "4xx/5xx", description = "Error")
     public ResponseEntity<ErrorResponse> handleNotFound(final ResponseStatusException exception) {
         return new ResponseEntity<>(
-                new ErrorResponse(exception.getStatusCode().value(), exception.getClass().getSimpleName(), exception.getMessage()),
+                ErrorResponse.builder()
+                        .httpStatus(exception.getStatusCode().value())
+                        .exception(exception.getClass().getSimpleName())
+                        .message(exception.getMessage())
+                        .build(),
                 exception.getStatusCode());
     }
 
@@ -25,7 +29,10 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrorResponse> handleThrowable(final Throwable exception) {
         exception.printStackTrace();
         return new ResponseEntity<>(
-                new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getClass().getSimpleName(), null),
+                ErrorResponse.builder()
+                        .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .exception(exception.getClass().getSimpleName())
+                        .build(),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

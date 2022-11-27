@@ -1,4 +1,10 @@
 package com.abnamro.recipe.dto.response;
 
-public record ErrorResponse(Integer httpStatus, String exception, String message) {
+import lombok.Builder;
+
+@Builder
+public class ErrorResponse {
+    private final Integer httpStatus;
+    private final String exception;
+    private final String message;
 }

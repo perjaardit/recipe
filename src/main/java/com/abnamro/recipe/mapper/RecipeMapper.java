@@ -43,10 +43,10 @@ public class RecipeMapper {
         if (CollectionUtils.isEmpty(ingredientsRequest)) {
             return Collections.emptySet();
         }
-        final Map<String, RecipeIngredient> mapByName = ingredients.stream()
-                .collect(Collectors.toMap(recipeIngredient -> recipeIngredient.getIngredient().getName(), Function.identity()));
+        final Map<Long, RecipeIngredient> mapByName = ingredients.stream()
+                .collect(Collectors.toMap(recipeIngredient -> recipeIngredient.getIngredient().getIid(), Function.identity()));
         return ingredientsRequest.stream().map(ingredientRequest -> {
-            final RecipeIngredient foundRecipe = mapByName.get(ingredientRequest.getName());
+            final RecipeIngredient foundRecipe = mapByName.get(ingredientRequest.getIid());
             if (foundRecipe != null) {
                 return ingredientMapper.map(ingredientRequest, foundRecipe);
             } else {
