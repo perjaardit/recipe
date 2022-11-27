@@ -25,7 +25,7 @@ variables:
     value: "recipe-appinsights"
 
 stages:
-  - template: pipelines/templates/recipe.infrastructure.yml
+  - template: templates/recipe.infrastructure.yml
     parameters:
       resourceGroup: $(resourceGroup)
       servicePrincipal: $(servicePrincipal)
