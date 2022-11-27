@@ -12,7 +12,7 @@ stages:
           - task: JavaToolInstaller@0
             inputs:
               versionSpec: '17'
-              jdkArchitectureOption: # Options: x64, x86
+              jdkArchitectureOption: 'x64' # Options: x64, x86
               jdkSourceOption: # Options: AzureStorage, LocalDirectory
               #jdkFile: # Required when jdkSourceOption == LocalDirectory
               #azureResourceManagerEndpoint: # Required when jdkSourceOption == AzureStorage
