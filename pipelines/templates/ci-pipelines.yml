@@ -18,7 +18,7 @@ stages:
               azureStorageAccountName: 'recipesa'
               azureContainerName: 'jdk'
               azureCommonVirtualFile: 'OpenJDK17.zip'
-              jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk17'
+              jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk'
               cleanDestinationDirectory: false
           - task: Maven@3
             displayName: 'Maven Package'
