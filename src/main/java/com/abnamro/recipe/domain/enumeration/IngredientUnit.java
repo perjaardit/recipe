@@ -1,5 +1,5 @@
 package com.abnamro.recipe.domain.enumeration;
 
 public enum IngredientUnit {
-    KG, GR, MG
+    KG, GR, MG, PIECE
 }

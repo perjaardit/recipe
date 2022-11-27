@@ -1,7 +1,6 @@
 package com.abnamro.recipe.service;
 
 import com.abnamro.recipe.domain.Recipe;
-import com.abnamro.recipe.domain.RecipeIngredient;
 import com.abnamro.recipe.dto.IngredientDTO;
 import com.abnamro.recipe.dto.RecipeDTO;
 import com.abnamro.recipe.repository.IngredientRepository;
@@ -9,10 +8,6 @@ import com.abnamro.recipe.repository.RecipeRepository;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,14 +22,7 @@ public class RecipeValidationService {
         if (recipeExists) {
             return webMessageResolverService.getMessage("Exists.recipe.name", recipe.getName());
         }
-
-        for (final IngredientDTO ingredient : recipe.getIngredients()) {
-            final boolean ingredientExists = ingredientRepository.existsByNameIgnoreCase(ingredient.getName());
-            if (ingredientExists) {
-                return webMessageResolverService.getMessage("Exists.ingredient.name", ingredient.getName());
-            }
-        }
-        return null;
+        return validateIngredients(recipe);
     }
 
     public String validateRecipeUpdate(final Recipe recipe,
@@ -45,19 +33,16 @@ public class RecipeValidationService {
                 return webMessageResolverService.getMessage("Exists.recipe.name", recipeRequest.getName());
             }
         }
+        return validateIngredients(recipeRequest);
+    }
 
-        final Map<Long, RecipeIngredient> mapByIngredientId = recipe.getIngredients().stream()
-                .collect(Collectors.toMap(recipeIngredient -> recipeIngredient.getIngredient().getIid(), Function.identity()));
+    private String validateIngredients(final RecipeDTO recipeRequest) {
         for (final IngredientDTO ingredient : recipeRequest.getIngredients()) {
-            final RecipeIngredient foundMatch = mapByIngredientId.get(ingredient.getIid());
-            if (foundMatch == null
-                    || (foundMatch.getIngredient() != null
-                    && ObjectUtils.notEqual(ingredient.getName(), foundMatch.getIngredient().getName()))) {
-                final boolean ingredientExists = ingredientRepository.existsByNameIgnoreCase(ingredient.getName());
-                if (ingredientExists) {
-                    return webMessageResolverService.getMessage("Exists.ingredient.name", ingredient.getName());
-                }
+            final boolean ingredientExists = ingredientRepository.existsById(ingredient.getIid());
+            if (ingredientExists) {
+                continue;
             }
+            return webMessageResolverService.getMessage("NotExists.ingredient.message", ingredient.getIid());
         }
         return null;
     }

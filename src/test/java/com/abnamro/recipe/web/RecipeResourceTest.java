@@ -7,6 +7,7 @@ import com.abnamro.recipe.dto.IngredientDTO;
 import com.abnamro.recipe.dto.RecipeDTO;
 import com.abnamro.recipe.dto.enumeration.MeasureUnit;
 import com.abnamro.recipe.mapper.RecipeMapper;
+import com.abnamro.recipe.repository.IngredientRepository;
 import com.abnamro.recipe.repository.RecipeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -32,6 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @AutoConfigureMockMvc
@@ -54,6 +56,9 @@ public class RecipeResourceTest {
     private RecipeRepository recipeRepository;
 
     @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
     private RecipeMapper recipeMapper;
 
     private MockMvc mockMvc;
@@ -69,28 +74,9 @@ public class RecipeResourceTest {
 
     @Test
     public void test1_successfully_create_recipe() throws Exception {
-        final RecipeDTO request = RecipeDTO.builder()
-                .name("Recipe 1")
-                .instructions("This is how should you cook")
-                .servings(3)
-                .vegetarian(Boolean.FALSE)
-                .ingredients(Set.of(IngredientDTO.builder()
-                                .name("Ingredient 1")
-                                .healthBenefit("These are the benefits of the ingredient 1")
-                                .measure(10.8)
-                                .unit(MeasureUnit.GR_UNIT)
-                                .build(),
-                        IngredientDTO.builder()
-                                .name("Ingredient 2")
-                                .healthBenefit("These are the benefits of the ingredient 2")
-                                .measure(1.0)
-                                .unit(MeasureUnit.KG_UNIT)
-                                .build()
-                )).build();
-
         mockMvc.perform(MockMvcRequestBuilders.post(POST_URL)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(request)))
+                        .content(asJsonString(getRecipeRequest())))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
     }
 
@@ -110,7 +96,7 @@ public class RecipeResourceTest {
                 .queryParam("servings", 3)
                 .queryParam("searchKey", "cook")
                 .queryParam("includeIngredients", Arrays.asList("Ingredient 1", "Ingredient 2"))
-                .queryParam("excludeIngredients", Arrays.asList("Ingredient 41", "Ingredient 5"));
+                .queryParam("excludeIngredients", Arrays.asList("Ingredient Second", "Ingredient First"));
 
         mockMvc.perform(MockMvcRequestBuilders.get(builder.build().toUriString()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -156,6 +142,24 @@ public class RecipeResourceTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private RecipeDTO getRecipeRequest() {
+        final Set<IngredientDTO> ingredients = ingredientRepository.findAll()
+                .stream()
+                .map(ingredient -> IngredientDTO.builder()
+                        .iid(ingredient.getIid())
+                        .measure(10.8)
+                        .unit(MeasureUnit.GR_UNIT)
+                        .build())
+                .collect(Collectors.toSet());
+        return RecipeDTO.builder()
+                .name("Recipe 1")
+                .instructions("This is how should you cook")
+                .servings(3)
+                .vegetarian(Boolean.FALSE)
+                .ingredients(ingredients)
+                .build();
     }
 
 }

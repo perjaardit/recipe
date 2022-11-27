@@ -65,7 +65,7 @@
                                  baseTableName="recipe_ingredient"
                                  constraintName="fk1_recipe_ingredient"
                                  referencedColumnNames="rid"
-                                 referencedTableName="Recipe"
+                                 referencedTableName="recipe"
                                  onUpdate="CASCADE"
                                  onDelete="CASCADE"/>
 
@@ -73,7 +73,7 @@
                                  baseTableName="recipe_ingredient"
                                  constraintName="fk2_recipe_ingredient"
                                  referencedColumnNames="iid"
-                                 referencedTableName="Ingredient"
+                                 referencedTableName="ingredient"
                                  onUpdate="CASCADE"
                                  onDelete="CASCADE"/>
     </changeSet>
