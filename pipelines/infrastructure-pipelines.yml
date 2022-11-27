@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-  - master
+  - none # none - run the infrastructure manually or branch name -> master
 
 variables:
   - name: resourceGroup

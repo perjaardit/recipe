@@ -103,7 +103,7 @@ stages:
                   --subnet ${{ parameters.virtualNetworkSubnet }}
       - job: provisionAppServiceSettings
         displayName: "Provision App Service Settings"
-        dependsOn: provisionApplicationInsights
+        dependsOn: provisionAppService
         steps:
           - task: AzureCLI@2
             inputs:
