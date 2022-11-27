@@ -21,4 +21,4 @@ stages:
               azureSubscription: ${{ parameters.servicePrincipal }}
               appType: 'webApp'
               WebAppName: ${{ parameters.appService }}
-              packageForLinux: '$(Pipeline.Workspace)/hello-world/**/*.?(war|jar)'
+              packageForLinux: '$(Pipeline.Workspace)/recipe/**/*.?(war|jar)'
