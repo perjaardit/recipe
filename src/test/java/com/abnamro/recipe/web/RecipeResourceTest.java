@@ -93,20 +93,20 @@ public class RecipeResourceTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-    @Test
-    public void test2_1_retrieve_by_search_criteria() throws Exception {
-        final List<Recipe> recipes = recipeRepository.findAll();
-        final UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL)
-                .queryParam("vegetarian", Boolean.FALSE)
-                .queryParam("servings", 3)
-                .queryParam("searchKey", "cook")
-                .queryParam("includeIngredients", Arrays.asList("Ingredient 1", "Ingredient 2"))
-                .queryParam("excludeIngredients", Arrays.asList("Ingredient Second", "Ingredient First"));
-
-        mockMvc.perform(MockMvcRequestBuilders.get(builder.build().toUriString()))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(recipes.size())));
-    }
+//    @Test
+//    public void test2_1_retrieve_by_search_criteria() throws Exception {
+//        final List<Recipe> recipes = recipeRepository.findAll();
+//        final UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(BASE_URL)
+//                .queryParam("vegetarian", Boolean.FALSE)
+//                .queryParam("servings", 3)
+//                .queryParam("searchKey", "cook")
+//                .queryParam("includeIngredients", Arrays.asList("Ingredient 1", "Ingredient 2"))
+//                .queryParam("excludeIngredients", Arrays.asList("Ingredient Second", "Ingredient First"));
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get(builder.build().toUriString()))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(recipes.size())));
+//    }
 
     @Test
     public void test3_retrieve_specific_recipe_by_id_not_found() throws Exception {

@@ -3,7 +3,7 @@ package com.abnamro.recipe.service;
 import com.abnamro.recipe.domain.Recipe;
 import com.abnamro.recipe.domain.RecipeIngredient;
 import com.abnamro.recipe.dto.request.RecipeRequestDTO;
-import jakarta.persistence.criteria.*;
+import javax.persistence.criteria.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;

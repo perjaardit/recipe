@@ -6,13 +6,13 @@ import com.abnamro.recipe.dto.request.RecipeRequestDTO;
 import com.abnamro.recipe.dto.response.RecipeResponseDTO;
 import com.abnamro.recipe.mapper.RecipeMapper;
 import com.abnamro.recipe.repository.RecipeRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -63,11 +63,11 @@ public class RecipeService {
     }
 
     public void delete(final Long id) {
-        recipeRepository.findById(id).ifPresentOrElse(recipe ->
-                        recipeRepository.deleteById(recipe.getRid())
-                , () -> {
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-                });
+        if(recipeRepository.findById(id).isPresent()) {
+            recipeRepository.deleteById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     public RecipeDTO getById(final Long recipeId) {

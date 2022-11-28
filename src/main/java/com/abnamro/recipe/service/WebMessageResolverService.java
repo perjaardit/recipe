@@ -1,6 +1,6 @@
 package com.abnamro.recipe.service;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;

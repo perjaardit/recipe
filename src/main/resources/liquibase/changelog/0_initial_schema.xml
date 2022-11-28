@@ -33,7 +33,7 @@
             </column>
             <column name="instructions" type="clob" remarks="The description of the recipe entry"/>
             <column name="servings" type="int" remarks="The servings of the recipe entry"/>
-            <column name="vegetarian" type="tinyint" remarks="Indicates if the recipe is vegetarian"/>
+            <column name="vegetarian" type="boolean" remarks="Indicates if the recipe is vegetarian"/>
         </createTable>
 
         <createTable tableName="ingredient">

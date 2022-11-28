@@ -1,7 +1,7 @@
 package com.abnamro.recipe.domain;
 
 import com.abnamro.recipe.domain.enumeration.IngredientUnit;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

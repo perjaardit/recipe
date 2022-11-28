@@ -13,19 +13,19 @@ stages:
       - job: ProvisionContinuesIntegration
         displayName: "Provision Continues Integration"
         steps:
-          # Java tool installer
-          # Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME
-          - task: JavaToolInstaller@0
-            inputs:
-              versionSpec: '17'
-              jdkArchitectureOption: 'x64'
-              jdkSourceOption: AzureStorage
-              azureResourceManagerEndpoint: ${{ parameters.servicePrincipal }}
-              azureStorageAccountName: ${{ parameters.accountStorage }}
-              azureContainerName: 'jdk'
-              azureCommonVirtualFile: 'OpenJDK17.zip'
-              jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk17'
-              cleanDestinationDirectory: true
+#          # Java tool installer
+#          # Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME
+#          - task: JavaToolInstaller@0
+#            inputs:
+#              versionSpec: '17'
+#              jdkArchitectureOption: 'x64'
+#              jdkSourceOption: AzureStorage
+#              azureResourceManagerEndpoint: ${{ parameters.servicePrincipal }}
+#              azureStorageAccountName: ${{ parameters.accountStorage }}
+#              azureContainerName: 'jdk'
+#              azureCommonVirtualFile: 'OpenJDK17.zip'
+#              jdkDestinationDirectory: '$(agent.toolsDirectory)/jdk17'
+#              cleanDestinationDirectory: true
           - task: Maven@3
             displayName: 'Maven Package'
             inputs:
