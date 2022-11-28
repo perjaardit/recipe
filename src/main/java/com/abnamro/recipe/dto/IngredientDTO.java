@@ -1,6 +1,7 @@
 package com.abnamro.recipe.dto;
 
 import com.abnamro.recipe.dto.enumeration.MeasureUnit;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "The model view of the ingredient")
 public class IngredientDTO {
 

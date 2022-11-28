@@ -1,5 +1,6 @@
 package com.abnamro.recipe.mapper;
 
+import com.abnamro.recipe.domain.Ingredient;
 import com.abnamro.recipe.domain.RecipeIngredient;
 import com.abnamro.recipe.dto.IngredientDTO;
 import org.mapstruct.Mapper;
@@ -7,10 +8,14 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(uses = {UnitMapper.class})
 public interface IIngredientMapper {
+
+    IngredientDTO mapToDTO(final Ingredient ingredient);
+    List<IngredientDTO> mapToDTO(final List<Ingredient> ingredient);
 
     @Mapping(target = "iid", source = "ingredient.iid")
     IngredientDTO mapToDTO(final RecipeIngredient recipe);
