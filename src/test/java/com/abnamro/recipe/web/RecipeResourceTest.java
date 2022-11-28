@@ -1,7 +1,6 @@
 package com.abnamro.recipe.web;
 
 import com.abnamro.recipe.RecipeApplication;
-import com.abnamro.recipe.config.RestExceptionHandler;
 import com.abnamro.recipe.domain.Ingredient;
 import com.abnamro.recipe.domain.Recipe;
 import com.abnamro.recipe.dto.IngredientDTO;
@@ -10,6 +9,7 @@ import com.abnamro.recipe.dto.enumeration.MeasureUnit;
 import com.abnamro.recipe.mapper.RecipeMapper;
 import com.abnamro.recipe.repository.IngredientRepository;
 import com.abnamro.recipe.repository.RecipeRepository;
+import com.abnamro.recipe.web.error.RestExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.hamcrest.Matchers;

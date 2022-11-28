@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -41,7 +42,14 @@ public class Recipe {
     @Column
     private Boolean vegetarian;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "rid", nullable = false)
     private Set<RecipeIngredient> ingredients = new HashSet<>();
+
+    public void setIngredients(Set<RecipeIngredient> ingredients) {
+        this.ingredients.clear();
+        if (CollectionUtils.isNotEmpty(ingredients)) {
+            this.ingredients.addAll(ingredients);
+        }
+    }
 }
