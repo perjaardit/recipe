@@ -16,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-@Transactional
 @AllArgsConstructor
 public class RecipeService {
 
@@ -45,6 +44,7 @@ public class RecipeService {
                 .build();
     }
 
+    @Transactional
     public RecipeResponseDTO update(final RecipeDTO source) {
         final Recipe recipe = recipeRepository.findById(source.getRid())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -55,7 +55,7 @@ public class RecipeService {
                     .message(errorMessage)
                     .build();
         }
-        recipeRepository.save(recipeMapper.map(recipe, source));
+        recipeRepository.saveAndFlush(recipeMapper.map(recipe, source));
         return RecipeResponseDTO.builder()
                 .message(webMessageResolverService.getMessage("recipe.update.success"))
                 .recipes(findAll())
@@ -63,10 +63,11 @@ public class RecipeService {
     }
 
     public void delete(final Long id) {
-        recipeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-
-        recipeRepository.deleteById(id);
+        recipeRepository.findById(id).ifPresentOrElse(recipe ->
+                        recipeRepository.deleteById(recipe.getRid())
+                , () -> {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                });
     }
 
     public RecipeDTO getById(final Long recipeId) {

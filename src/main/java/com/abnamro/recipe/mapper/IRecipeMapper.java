@@ -23,7 +23,8 @@ public interface IRecipeMapper {
             @Mapping(source = "requestRecipe.instructions", target = "instructions"),
             @Mapping(source = "requestRecipe.servings", target = "servings"),
             @Mapping(source = "requestRecipe.vegetarian", target = "vegetarian"),
-            @Mapping(target = "recipe.ingredients", ignore = true)
+            @Mapping(target = "recipe.ingredients", ignore = true),
+            @Mapping(target = "rid", ignore = true)
     })
     Recipe map(final RecipeDTO requestRecipe, @MappingTarget Recipe recipe);
 
